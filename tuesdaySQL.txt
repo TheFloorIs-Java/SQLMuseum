@@ -1,0 +1,42 @@
+drop table if exists painting;
+drop table if exists artist;
+drop table if exists genre;
+
+
+create table artist (
+	artist_id int primary key,
+	name varchar(255)
+);
+
+create table genre (
+	genre_id int primary key,
+	title varchar(255)
+);
+
+create table painting (
+	title varchar(255) primary key,
+	artist int,
+	genre int,
+	year_made int,
+	foreign key (artist) references artist(artist_id),
+	foreign key (genre) references genre(genre_id)
+);
+
+insert into artist(artist_id, name) values 
+(1, 'Kandinsky');
+insert into artist(artist_id, name) values 
+(2, 'Klee');
+
+insert into genre(genre_id, title) values 
+(1, 'Abstract');
+
+insert into painting(title, year_made, artist, genre) values 
+('Composition IX', 1969, 1, 1);
+insert into painting(title, year_made, artist, genre) values 
+('Gentle Ascent', 1968, 1, 1);
+insert into painting(title, year_made, artist, genre) values 
+('Yellow Birds', 1958, 2, 1);
+
+select * from painting;
+
+select * from painting inner join artist on artist.artist_id = painting.artist;
